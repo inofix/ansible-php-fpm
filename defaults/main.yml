@@ -1,3 +1,15 @@
 ---
 # defaults file for ansible-php-fpm
+## default is debian style, for other distro support
+## take a look at os__pkg_name and yapkg_list
+default__php__yapkg__names:
+  - 'php5-fpm'
 
+default__php__user:
+  - user: 'php-fpm'
+    group: 'php-fpm'
+    home: '/var/lib/php-fpm'
+    comment: 'Dedicated User for PHP'
+
+default__php__nologin: '/usr/bin/nologin'
+default__php__noshell: '/bin/false'
