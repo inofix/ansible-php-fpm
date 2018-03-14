@@ -11,7 +11,7 @@ Unstable.
 Installation
 ------------
 
- # ansible-galaxy install inofix.php-fpm
+    # ansible-galaxy install inofix.php-fpm
 
 Requirements
 ------------
