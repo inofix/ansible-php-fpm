@@ -33,5 +33,12 @@
     - '{{ php__process }}'
     - '{{ user_nologin_fact }}'
 
-#- name: Create a dedicated config/socket for distinct processes
-#  template:
+- name: Create a dedicated config/socket for distinct processes
+  template:
+    src: 'process.conf.j2'
+    dest: '{{ php_fpm__pool }}/{{ item.name }}.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items: '{{ php__process }}'
+

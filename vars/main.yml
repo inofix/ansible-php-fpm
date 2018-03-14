@@ -10,3 +10,5 @@ php__nologin: '{{ app__php__nologin | d(default__php__nologin) }}'
 # fallback shell for nologin
 php__noshell: '/bin/false'
 
+php_fpm__pool: '{{ app__php_fpm__pool | d(default__php_fpm__pool, True) }}'
+

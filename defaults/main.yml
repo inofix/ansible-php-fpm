@@ -20,3 +20,4 @@ default__php__process:
 #      ...
 
 default__php__nologin: '/usr/bin/nologin'
+default__php_fpm__pool: '/etc/php5/fpm/pool.d'
