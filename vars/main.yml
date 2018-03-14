@@ -4,10 +4,9 @@
 php__yapkg__names: '{% if app__php__yapkg__list is not defined or app__php__yapkg__list is none %}{{ app__php__yapkg__names | d(default__php__yapkg__names) }}{% endif %}'
 php__yapkg__list: '{% if app__php__yapkg__list is defined and app__php__yapkg__list is not none and app__php__yapkg__list is not string and app__php__yapkg__list is iterable %}{{ app__php__yapkg__list }}{% endif %}'
 
-php__user: '{{ app__php__user | d(default__php__user, True) }}'
+php__process: '{{ app__php__process | d(default__php__process, True) }}'
 
 php__nologin: '{{ app__php__nologin | d(default__php__nologin) }}'
 # fallback shell for nologin
 php__noshell: '/bin/false'
-
 

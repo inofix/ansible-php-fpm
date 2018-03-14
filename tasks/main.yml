@@ -5,7 +5,7 @@
   stat:
     path: '{{ item.shell | d(php__nologin) }}'
   register: user_nologin_stat
-  with_items: '{{ php__user }}'
+  with_items: '{{ php__process }}'
 
 - name: Set the right login shell per user
   set_fact:
@@ -19,7 +19,7 @@
     name: "{{ item.group }}"
     system: yes
   when: '{{ item.group is defined and item.group is string }}'
-  with_items: '{{ php__user }}'
+  with_items: '{{ php__process }}'
 
 - name: Make sure the right users exist
   user:
@@ -30,7 +30,7 @@
     system: yes
   when: '{{ item.0.user == item.1.user }}'
   with_together:
-    - '{{ php__user }}'
+    - '{{ php__process }}'
     - '{{ user_nologin_fact }}'
 
 #- name: Create a dedicated config/socket for distinct processes

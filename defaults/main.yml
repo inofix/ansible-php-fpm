@@ -5,10 +5,18 @@
 default__php__yapkg__names:
   - 'php5-fpm'
 
-default__php__user:
-  - user: 'php-fpm'
+# a list of dedicated process configs to maintain in the pool
+# add the user and process related infos first and the optional
+# pool config inside "conf:"
+default__php__process:
+  - name: "custom-php"
+    user: 'php-fpm'
     group: 'php-fpm'
     home: '/var/lib/php-fpm'
-    comment: 'Dedicated User for PHP'
+    comment: 'Dedicated Process for PHP-FPM'
+    conf:
+      # all these attributes are added to the config no questions asked
+      listen: '/var/run/php5-fpm-custom.sock'
+#      ...
 
 default__php__nologin: '/usr/bin/nologin'
