@@ -12,4 +12,3 @@ default__php__user:
     comment: 'Dedicated User for PHP'
 
 default__php__nologin: '/usr/bin/nologin'
-default__php__noshell: '/bin/false'

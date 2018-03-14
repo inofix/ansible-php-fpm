@@ -7,4 +7,7 @@ php__yapkg__list: '{% if app__php__yapkg__list is defined and app__php__yapkg__l
 php__user: '{{ app__php__user | d(default__php__user, True) }}'
 
 php__nologin: '{{ app__php__nologin | d(default__php__nologin) }}'
+# fallback shell for nologin
+php__noshell: '/bin/false'
+
 
