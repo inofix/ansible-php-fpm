@@ -1,5 +1,6 @@
 ---
 # tasks file for ansible-php-fpm
+
 - name: Search for the right login shell per user
   stat:
     path: '{{ item.shell | d(php__nologin) }}'
@@ -17,7 +18,7 @@
   group:
     name: "{{ item.group }}"
     system: yes
-  when: item.group is defined and item.group is string
+  when: '{{ item.group is defined and item.group is string }}'
   with_items: '{{ php__user }}'
 
 - name: Make sure the right users exist
@@ -27,8 +28,10 @@
     home: "{{ item.0.home | d('/var/lib/' + item.0.user) }}"
     shell: "{{ item.1.shell }}"
     system: yes
-  when: item.0.user == item.1.user
+  when: '{{ item.0.user == item.1.user }}'
   with_together:
     - '{{ php__user }}'
     - '{{ user_nologin_fact }}'
 
+#- name: Create a dedicated config/socket for distinct processes
+#  template:
