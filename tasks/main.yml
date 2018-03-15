@@ -5,6 +5,9 @@
   stat:
     path: '{{ item.shell | d(php__nologin) }}'
   register: user_nologin_stat
+  when:
+    - '{{ item.name is defined }}'
+    - '{{ item.name is string }}'
   with_items: '{{ php__process }}'
 
 - name: Set the right login shell per user
@@ -12,13 +15,17 @@
     user_nologin_fact: '{{ user_nologin_fact | d([]) + [ {"shell": the_shell, "user": item.item.user} ] }}'
   vars:
     the_shell: '{% if item.stat.exists %}{{ item.item.shell }}{% else %}{{ php__nologin }}{% endif %}'
+  when:
+    - '{{ item.stat is defined }}'
   with_items: '{{ user_nologin_stat.results }}'
 
 - name: Make sure the right groups exist
   group:
     name: "{{ item.group }}"
     system: yes
-  when: '{{ item.group is defined and item.group is string }}'
+  when:
+    - '{{ item.group is defined }}'
+    - '{{ item.group is string }}'
   with_items: '{{ php__process }}'
 
 - name: Make sure the right users exist
@@ -28,7 +35,9 @@
     home: "{{ item.0.home | d('/var/lib/' + item.0.user) }}"
     shell: "{{ item.1.shell }}"
     system: yes
-  when: '{{ item.0.user == item.1.user }}'
+  when:
+    - '{{ item.0.user is defined }}'
+    - '{{ item.0.user == item.1.user }}'
   with_together:
     - '{{ php__process }}'
     - '{{ user_nologin_fact }}'
@@ -40,5 +49,8 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
+  when:
+    - '{{ item.name is defined }}'
+    - '{{ item.name is string }}'
   with_items: '{{ php__process }}'
 
