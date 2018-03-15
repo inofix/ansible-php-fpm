@@ -5,7 +5,5 @@
 user = {{ item.user }}
 group = {{ item.group }}
 
-{% for k,v in item.conf.iteritems() %}
-{{ k }} = {{ v }}
-{% endfor %}
+{% item.conf %}
 
