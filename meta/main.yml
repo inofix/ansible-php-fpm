@@ -14,6 +14,6 @@ galaxy_info:
     - cgi:fastcgi
 
 dependencies:
-  - { role: inofix.yapkg, yapkg__group_name: 'php (fpm)', yapkg__names: '{{ php__yapkg__names }}', when: '{{ php__yapkg__names is not string and php__yapkg__names is iterable }}' }
-  - { role: inofix.yapkg, yapkg__group_name: 'php (fpm)', yapkg__list: '{{ php__yapkg__list }}', when: '{{ php__yapkg__list is not string and php__yapkg__list is iterable }}' }
+  - { role: inofix.yapkg, yapkg__group_name: 'php (fpm)', yapkg__names: '{{ php__yapkg__names }}', when: 'php__yapkg__names is not string and php__yapkg__names is iterable' }
+  - { role: inofix.yapkg, yapkg__group_name: 'php (fpm)', yapkg__list: '{{ php__yapkg__list }}', when: 'php__yapkg__list is not string and php__yapkg__list is iterable' }
 
